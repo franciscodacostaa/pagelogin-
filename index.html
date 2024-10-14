@@ -4,5 +4,30 @@
          <input type="text" placeholder="E-mail ou Telefone" required> </div> <div class="textbox"> 
         <input type="password" placeholder="Senha" required> </div>
          <input type="submit" class="btn" value="Entrar"> <p class="signup">Não tem uma conta? <a href="#">Crie uma agora</a></p> </form> </div> </div> 
-        </body>
+        <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAXdwi-qCwEVkNsCje4c-R6izIKCI1S5EU",
+    authDomain: "dadosinf-bb992.firebaseapp.com",
+    databaseURL: "https://dadosinf-bb992-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "dadosinf-bb992",
+    storageBucket: "dadosinf-bb992.appspot.com",
+    messagingSenderId: "84033846465",
+    appId: "1:84033846465:web:2a04bc2dc851372e6f2840",
+    measurementId: "G-TPSEG409WB"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+ 
+ </body>
          </html>
